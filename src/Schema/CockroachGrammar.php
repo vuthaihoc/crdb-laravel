@@ -51,4 +51,17 @@ class CockroachGrammar extends PostgresGrammar
 
         return "drop index {$this->wrapTable($blueprint)}@{$index} cascade";
     }
+    
+    /** {@inheritDoc} */
+    public function compileIndex(Blueprint $blueprint, Fluent $command)
+    {
+        return sprintf('create index %s on %s%s (%s)%s',
+            $this->wrap($command->index),
+            $this->wrapTable($blueprint),
+            $command->algorithm ? ' using ' . $command->algorithm : '',
+            $this->columnize($command->columns),
+            !empty($command->storing) ? ' storing (' . $this->columnize(Arr::wrap($command->storing)) . ')' : ''
+        );
+    }
+    
 }
