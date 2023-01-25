@@ -4,6 +4,7 @@ namespace YlsIdeas\CockroachDb\Schema;
 
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Schema\Grammars\PostgresGrammar;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Fluent;
 use YlsIdeas\CockroachDb\Exceptions\FeatureNotSupportedException;
 
@@ -51,7 +52,7 @@ class CockroachGrammar extends PostgresGrammar
 
         return "drop index {$this->wrapTable($blueprint)}@{$index} cascade";
     }
-    
+
     /** {@inheritDoc} */
     public function compileIndex(Blueprint $blueprint, Fluent $command)
     {
@@ -84,5 +85,5 @@ class CockroachGrammar extends PostgresGrammar
 
         return $sql;
     }
-    
+
 }
