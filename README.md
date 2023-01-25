@@ -60,6 +60,12 @@ DATABASE_URL=cockroachdb://<username>:<password>@<host>:<port>/<database>?sslmod
 
 To enable set `DB_CONNECTION=crdb` in your .env.
 
+- Using `storing` (when create an index or unique index)
+
+
+    $table->string('email');
+    $table->unique('email')->storing('password');
+
 ## Notes
 
 CockroachDB should work inline with the feature set of Postgresql, with some exceptions. You can look at the
