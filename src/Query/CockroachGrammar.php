@@ -85,4 +85,15 @@ class CockroachGrammar extends PostgresGrammar
     {
         return ['truncate ' . $this->wrapTable($query->from) . ' cascade' => []];
     }
+
+    /**
+     * Get the format for database stored dates.
+     *
+     * @return string
+     */
+    public function getDateFormat()
+    {
+        return config('database.date_format', 'Y-m-d H:i:s');
+    }
+
 }
