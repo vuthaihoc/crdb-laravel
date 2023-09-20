@@ -22,7 +22,8 @@ class CockroachDbConnection extends PostgresConnection implements ConnectionInte
      */
     protected function getDefaultQueryGrammar()
     {
-        return $this->withTablePrefix(new QueryGrammar());
+        ($grammar = new QueryGrammar)->setConnection($this);
+        return $this->withTablePrefix($grammar);
     }
 
     /**
