@@ -24,6 +24,9 @@ class CockroachDbServiceProvider extends ServiceProvider
                     $config['host'] = $host;
                     try {
                         $pdo = $connector->connect($config);
+                        if($statement_timeout = Arr::get($config, 'options.statement_timeout')){
+                            $pdo->prepare("set session statement_timeout=" . (int) $statement_timeout)->execute();
+                        }
                         break;
                     } catch (PDOException $e) {
                         continue;
